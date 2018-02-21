@@ -4,30 +4,29 @@ let correctCount = 0;
 let incorrectCount = 0;
 let questionsAnswersCount = 1;
 
+const correctMessage = 'Correct!!!';
+const incorrectMessage = 'Incorrect, better luck next time! ¯\\_(ツ)_/¯';
+const gameOverMessage = 'Game over, do you wanna try again?';
+const newGamebtn = 'New Game?';
+
 let timer = '';
 const questionsAnswers = {
             1:{
                 question:'In S1E1 "Pilot": Who started their first day at Dunder Mifflin Scranton?',
                 answers:['Jim Halpert', 'Ryan Howard', 'Michael Scott', 'Erin Hannon'],
                 correctAnswer: 'Ryan Howard',
-                correctMessage: 'Correct!',
-                incorrectMessage: 'Incorrect, better luck next time! ¯\\_(ツ)_/¯',
                 imageUrl:'assets/images/ryanhoward.gif'
                },
             2:{
                 question:'In S1E2 "Diversity Day": What famous comedian\'s stand up routine does Michael imitate?',
                 answers:['Chris Rock', 'Richard Pryor', 'Robin Williams', 'George Carlin'],
                 correctAnswer:'Chris Rock',
-                correctMessage: 'Correct!',
-                incorrectMessage: 'Incorrect, better luck next time! ¯\\_(ツ)_/¯',
                 imageUrl:'assets/images/chrisrock.gif'
             },
             3:{
                 question:'In S1E3 "Health Care": Which of these is NOT one of Jim and Pam\'s made up diseases?',
                 answers:['Killer nanorobots', 'Hot Dog Fingers', 'Spontaneous Dental Hydroplosion', 'Hair Cancer'],
                 correctAnswer:'Spontaneous Dental Hydroplosion',
-                correctMessage: 'Correct!',
-                incorrectMessage: 'Incorrect, better luck next time! ¯\\_(ツ)_/¯',
                 imageUrl:'assets/images/jimpam.gif'
             },           
     };
@@ -62,7 +61,7 @@ const createAnswers = function(){
         //Create new div to hold answers
         let newBtn = $('<button>');
         //Add class to new Div
-        newBtn.addClass('answers redBtn');
+        newBtn.addClass('answers redBtn btn btn-info');
         //Give buttons attribute
         newBtn.attr('data-type', answers);
         //add text to new Div
@@ -77,7 +76,7 @@ const createAnswers = function(){
 const checkAnswer = function(){
      //Get users answer choice
     let userAnswer = $(this).data('type');
-    let correctAnswer = questionsAnswers[questionsAnswersCount].correct;
+    let correctAnswer = questionsAnswers[questionsAnswersCount].correctAnswer;
     let correctImg = questionsAnswers[questionsAnswersCount].imageUrl;
 
     let correct = questionsAnswers[questionsAnswersCount].correct;
@@ -90,13 +89,14 @@ const checkAnswer = function(){
         $('#game').empty();
         let newImg = $('<img>');
         newImg.attr('src',correctImg);
+        newImg.addClass('img-fluid');
         $('#game').append(newImg);
         //Create Div
         let newDiv = $('<div>');
         //Give div class
-        newDiv.addClass('correctAnswer');
+        newDiv.addClass('correctAnswer img-fluid');
         //adds CORRECT! text to div
-        newDiv.text(correct);
+        newDiv.text(correctMessage);
         //Add answer to DOM
         $('#game').append(newDiv);
         //Stops Time
@@ -110,38 +110,38 @@ const checkAnswer = function(){
                     $('#game').empty();
                     createQuestions();
                     },3500);
-        }
-        else{
+        } else {
             $('#game').empty();
             let newImg = $('<img>');
             newImg.attr('src',correctImg);
+            newImg.addClass('img-fluid');
             $('#game').append(newImg);
             //Create Div
             let newDiv = $('<div>');
             //Give div class
-            newDiv.addClass('correctAnswer');
+            newDiv.addClass('correctAnswer img-fluid');
             //adds CORRECT! text to div
-            newDiv.text(correct);
+            newDiv.text(correctMessage);
             //Add answer to DOM
             $('#game').append(newDiv);
             //Stops Time
             clearInterval(timer)
             //Reset
             setTimeout(gameOver, 3500);
-        }
-    }
-    else{
+        };
+    } else {
         incorrectCount++;
         //Clears out triv Section
         $('#game').empty();
         let newImg = $('<img>');
         newImg.attr('src',correctImg);
+        newImg.addClass('img-fluid');
         $('#game').append(newImg);
         let newDiv = $('<div>');
         //Give div class
-        newDiv.addClass('incorrectAnswer');
+        newDiv.addClass('incorrectAnswer img-fluid');
         //adds incorrect! text to div
-        newDiv.text(incorrect);
+        newDiv.text(incorrectMessage);
         //Add answer to DOM
         $('#game').append(newDiv);
         //Stops Time
@@ -154,16 +154,16 @@ const checkAnswer = function(){
             $('#game').empty();
             createQuestions();
             },3500);
-        }
-        else{
+        } else {
             //Clears out triv Section
             $('#game').empty();
             let newImg = $('<img>');
-        newImg.attr('src',correctImg);
-        $('#game').append(newImg);
+            newImg.attr('src',correctImg);
+            newImg.addClass('img-fluid');
+            $('#game').append(newImg);
             let newDiv = $('<div>');
             //Give div class
-            newDiv.addClass('incorrectAnswer');
+            newDiv.addClass('incorrectAnswer img-fluid');
             //adds incorrect! text to div
             newDiv.text(incorrect);
             //Add answer to DOM
@@ -174,7 +174,7 @@ const checkAnswer = function(){
             setTimeout(gameOver, 3500);
         }
     }
-}
+};
 
 const timerStart = function(){ 
     $('#game').empty();
@@ -213,22 +213,22 @@ const gameOver = function(){
     $('#game').empty();
     let scoreDiv = $('<div>');
     scoreDiv.addClass('score');
-    scoreDiv.html('Correct: ' + correctCount + '<br>' + 'incorrect: ' + incorrectCount);
+    scoreDiv.html('Correct: ' + correctCount + '<br>' + 'Incorrect: ' + incorrectCount);
     $('#game').append(scoreDiv);
     //Assign new div element to new Div
     let newDiv = $('<div>');
     //add class to new Div
     newDiv.addClass('gameOver');
     //add game over text
-    newDiv.text('Game Over! Play Again ?');
+    newDiv.text(gameOverMessage);
     //Append game over text to DOM
     $('#game').append(newDiv);
     //Create ResetButton
     let newBtn = $('<button>');
     //Give btn Class
-    newBtn.addClass('redBtn resetBtn');
+    newBtn.addClass('redBtn btn btn-warning resetBtn');
     //Give btn reset Text
-    newBtn.text('Reset');
+    newBtn.text(newGamebtn);
     //Append
     $('#game').append(newBtn);
     //Reset all value
@@ -238,7 +238,7 @@ const gameOver = function(){
     incorrectCount = 0;
     //When reset button is clicked.......
     $('.resetBtn').on('click',function(){
-        $('.trivSection').empty()
+        $('#game').empty()
         //Starts game over
         createQuestions();
     });

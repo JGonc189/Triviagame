@@ -1,9 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Arimo');
 
-* {
-	position: relative;
-}
-
 h1,
 h2,
 h3,
@@ -15,21 +11,29 @@ span, {
 	font-family: 'Arimo', sans-serif;
 }
 
-.wrapper {
+/* .wrapper {
 	margin: 0 auto;
-}
+} */
 
-.wrapper img {
+/* .wrapper img {
 	margin-left: 300px;
 	margin-top: 15px;
-}
+} */
 
 #game {
 	/*top: 100px;*/
-	margin: 10px auto;
-	width: 850px;
+	/* margin: 10px auto; */
+	/* width: 850px; */
 	border: 1px solid #000;
 	border-radius: 5px;
 	padding: 5px;
 	background-color: whitesmoke;
+}
+
+.btn {
+	margin: 5px;
+}
+
+img {
+	margin: 5px;
 }
