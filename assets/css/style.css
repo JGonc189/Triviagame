@@ -15,18 +15,18 @@ span, {
 	font-family: 'Arimo', sans-serif;
 }
 
-body {
-	/*background: url('../images/background.png');*/
-	background: #000;
-}
-
 .wrapper {
 	margin: 0 auto;
 }
 
+.wrapper img {
+	margin-left: 300px;
+	margin-top: 15px;
+}
+
 #game {
-	top: 100px;
-	margin: 0 auto;
+	/*top: 100px;*/
+	margin: 10px auto;
 	width: 850px;
 	border: 1px solid #000;
 	border-radius: 5px;
